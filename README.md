@@ -1,5 +1,5 @@
 ## 🖥️ Desgin Screenshot
-![Dashboard Screenshot](3d pic/react-dog.png)
+![Dashboard Screenshot](3d-pic/react-dog.png)
 # 🐕 Dogstudio Clone - 3D Creative Portfolio
 
 An immersive, high-end creative studio portfolio clone inspired by the award-winning **Dogstudio** website. This project showcases the power of **React Three Fiber** and **GSAP** to create a seamless blend of 3D elements and modern web typography.

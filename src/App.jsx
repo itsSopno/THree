@@ -112,7 +112,38 @@ function App() {
 
 
         </section>
-        <section id='section-3' ></section>
+       <section id='section-3'>
+  <div className="contact-wrapper">
+    <div className="cta-text">
+      <h2>Let's build <br /> <span>Something Great</span></h2>
+    </div>
+    
+    <div className="footer-bottom">
+      <div className="footer-links">
+        <div className="link-group">
+          <small>SOCIAL</small>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+        </div>
+        <div className="link-group">
+          <small>CONTACT</small>
+          <a href="mailto:hello@dogstudio.co">hello@dogstudio.co</a>
+          <p>+32 81 22 55 11</p>
+        </div>
+        <div className="link-group">
+          <small>OFFICES</small>
+          <p>Namur / Chicago / Mexico</p>
+        </div>
+      </div>
+      
+      <div className="copyright">
+        <p>© 2026 DOGSTUDIO / DEPT®</p>
+        <p>Privacy Policy</p>
+      </div>
+    </div>
+  </div>
+</section>
       </main>
     </>
   )

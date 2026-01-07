@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import * as THREE from "three"
-import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls, useGLTF, useTexture, useAnimations } from '@react-three/drei'
+import { useThree } from '@react-three/fiber'
+import { useGLTF, useTexture, useAnimations } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
 import gsap from "gsap";
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

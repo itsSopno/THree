@@ -1,7 +1,8 @@
 import { Canvas } from '@react-three/fiber'
+import { Suspense } from 'react'
 import Dog from '../components/Dog'
-
-function Home() {
+import { Link } from 'react-router-dom'
+function Home({ isLoading }) {
   return (
     <>
       <div className="images">
@@ -22,8 +23,12 @@ function Home() {
           top: 0,
           left: 0,
           zIndex: 1,
+          opacity: isLoading ? 0 : 1,
+          transition: 'opacity 0.5s ease-in-out'
         }} >
-        <Dog />
+        <Suspense fallback={null}>
+          <Dog />
+        </Suspense>
       </Canvas>
       <section id='section-1' >
         <nav>
@@ -54,9 +59,11 @@ function Home() {
           </div>
         </nav>
         <div className="middle">
+          
           <div className="left">
             <h1>WE <br /> Make <br /> Good <br />Shit</h1>
           </div>
+         
           <div className="right"></div>
         </div>
         <div className="bottom">
@@ -108,295 +115,147 @@ function Home() {
       </section>
 
       {/* Services Section */}
-      <section id='section-services' style={{
-        padding: '8rem 4rem',
-        background: '',
-        color: '#fff'
+    
+      {/* Services Section - Redesigned */}
+<section id='section-services' style={{
+  padding: '10rem 2rem',
+
+  color: '#fff',
+  position: 'relative',
+  overflow: 'hidden'
+}}>
+  {/* Background Decoration */}
+  <div style={{
+    position: 'absolute',
+    top: '20%',
+    left: '50%',
+    width: '40vw',
+    height: '40vw',
+    background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)',
+    transform: 'translate(-50%, -50%)',
+    pointerEvents: 'none'
+  }}></div>
+
+  <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+    <div style={{ marginBottom: '8rem' }}>
+      <small style={{ letterSpacing: '0.5rem', color: '#666', textTransform: 'uppercase' }}>Expertise</small>
+      <h2 style={{ 
+        fontSize: 'clamp(3rem, 8vw, 6rem)', 
+        fontWeight: '900', 
+        lineHeight: '0.9',
+        marginTop: '1.5rem',
+        letterSpacing: '-0.04em'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-            <h2 style={{ 
-              fontSize: '4rem', 
-              fontWeight: 'bold', 
-              marginBottom: '2rem',
-              background: 'linear-gradient(45deg, #fff, #888)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
+        WE CRAFT <br /> 
+        <span style={{ color: '#444' }}>DIGITAL EMOTIONS</span>
+      </h2>
+    </div>
+    
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
+      gap: '1px', /* Border effect */
+      // background: 'rgba(255,255,255,0.1)', /* Grid line color */
+      border: '1px solid rgba(255,255,255,0.1)'
+    }}>
+      {[
+        { title: 'Experience Design', desc: 'Crafting journeys that feel natural and look extraordinary.', icon: '01' },
+        { title: 'Interactive 3D', desc: 'Bringing depth to the web with real-time 3D environments.', icon: '02' },
+        { title: 'Creative Tech', desc: 'Pushing the boundaries of what is possible in a browser.', icon: '03' }
+      ].map((item, i) => (
+        <div key={i} className="service-card" style={{
+          padding: '4rem 3rem',
+        
+          transition: 'all 0.4s cubic-bezier(0.2, 1, 0.3, 1)',
+          cursor: 'crosshair'
+        }}>
+          <span style={{ fontSize: '0.9rem', color: '#444', marginBottom: '2rem', display: 'block' }}>{item.icon}</span>
+          <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontWeight: '500' }}>{item.title}</h3>
+          <p style={{ color: '#888', lineHeight: '1.6', fontSize: '1.1rem' }}>{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Stats & Process - Merged into a modern layout */}
+<section id='section-process' style={{ padding: '10rem 2rem', }}>
+  <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'flex-end' }}>
+      <div style={{ flex: '1 1 500px' }}>
+        <h2 style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '3rem' }}>How we move.</h2>
+        <div className="process-list">
+          {['Deep Discovery', 'Abstract Thinking', 'Meticulous Build'].map((step, i) => (
+            <div key={i} style={{ 
+              padding: '2rem 0', 
+              borderTop: '1px solid rgba(255,255,255,0.1)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
             }}>
-              What We Do
-            </h2>
-            <p style={{ fontSize: '1.2rem', color: '#ccc', maxWidth: '600px', margin: '0 auto' }}>
-              We craft digital experiences that push boundaries and inspire audiences through innovative design and cutting-edge technology.
-            </p>
-          </div>
-          
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '3rem' 
-          }}>
-            {[
-              {
-                title: 'Digital Experiences',
-                description: 'Immersive web experiences that captivate and engage users through innovative interactions.',
-                icon: '🎨'
-              },
-              {
-                title: '3D & Animation',
-                description: 'Stunning 3D visuals and animations that bring your brand to life in the digital space.',
-                icon: '🎬'
-              },
-              {
-                title: 'Creative Development',
-                description: 'Custom solutions that blend creativity with technical excellence for unique digital products.',
-                icon: '⚡'
-              }
-            ].map((service, index) => (
-              <div key={index} style={{
-                padding: '3rem 2rem',
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderRadius: '12px',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                textAlign: 'center',
-                transition: 'transform 0.3s ease, background 0.3s ease',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.transform = 'translateY(-10px)';
-                e.target.style.background = 'rgba(255, 255, 255, 0.08)';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.background = 'rgba(255, 255, 255, 0.05)';
-              }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{service.icon}</div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff' }}>{service.title}</h3>
-                <p style={{ color: '#ccc', lineHeight: '1.6' }}>{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section id='section-stats' style={{
-        padding: '6rem 4rem',
-      
-        color: '#fff'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-            gap: '4rem',
-            textAlign: 'center'
-          }}>
-            {[
-              { number: '150+', label: 'Projects Completed' },
-              { number: '50+', label: 'Happy Clients' },
-              { number: '8+', label: 'Years Experience' },
-              { number: '3', label: 'Global Offices' }
-            ].map((stat, index) => (
-              <div key={index}>
-                <div style={{ 
-                  fontSize: '3.5rem', 
-                  fontWeight: 'bold', 
-                  marginBottom: '1rem',
-                  background: 'linear-gradient(45deg, #fff, #888)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}>
-                  {stat.number}
-                </div>
-                <p style={{ color: '#ccc', fontSize: '1.1rem' }}>{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section id='section-process' style={{
-        padding: '8rem 4rem',
-     
-        color: '#fff'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-            <h2 style={{ 
-              fontSize: '4rem', 
-              fontWeight: 'bold', 
-              marginBottom: '2rem',
-              background: 'linear-gradient(45deg, #fff, #888)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              Our Process
-            </h2>
-            <p style={{ fontSize: '1.2rem', color: '#ccc', maxWidth: '600px', margin: '0 auto' }}>
-              From concept to launch, we follow a proven process that ensures exceptional results.
-            </p>
-          </div>
-          
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-            gap: '3rem' 
-          }}>
-            {[
-              {
-                step: '01',
-                title: 'Discovery',
-                description: 'We dive deep into your brand, goals, and audience to understand what makes you unique.'
-              },
-              {
-                step: '02',
-                title: 'Design',
-                description: 'Our creative team crafts stunning visuals and user experiences that tell your story.'
-              },
-              {
-                step: '03',
-                title: 'Develop',
-                description: 'We bring designs to life with cutting-edge technology and meticulous attention to detail.'
-              },
-              {
-                step: '04',
-                title: 'Deploy',
-                description: 'Launch day and beyond - we ensure everything runs smoothly and performs perfectly.'
-              }
-            ].map((process, index) => (
-              <div key={index} style={{
-                padding: '2rem',
-                position: 'relative'
-              }}>
-                <div style={{
-                  fontSize: '4rem',
-                  fontWeight: 'bold',
-                  color: 'rgba(255, 255, 255, 0.1)',
-                  marginBottom: '1rem'
-                }}>
-                  {process.step}
-                </div>
-                <h3 style={{ 
-                  fontSize: '1.5rem', 
-                  marginBottom: '1rem', 
-                  color: '#fff' 
-                }}>
-                  {process.title}
-                </h3>
-                <p style={{ color: '#ccc', lineHeight: '1.6' }}>
-                  {process.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id='section-testimonials' style={{
-        padding: '8rem 4rem',
-      
-        color: '#fff'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-            <h2 style={{ 
-              fontSize: '4rem', 
-              fontWeight: 'bold', 
-              marginBottom: '2rem',
-              background: 'linear-gradient(45deg, #fff, #888)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
-              What Clients Say
-            </h2>
-          </div>
-          
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-            gap: '3rem' 
-          }}>
-            {[
-              {
-                quote: "Dogstudio transformed our digital presence with an incredible 3D experience that our users absolutely love.",
-                author: "Sarah Johnson",
-                company: "Tech Innovations Inc."
-              },
-              {
-                quote: "The attention to detail and creative vision exceeded all our expectations. Truly exceptional work.",
-                author: "Michael Chen",
-                company: "Creative Agency"
-              },
-              {
-                quote: "Working with Dogstudio was seamless. They understood our vision and brought it to life beautifully.",
-                author: "Emma Rodriguez",
-                company: "Startup Ventures"
-              }
-            ].map((testimonial, index) => (
-              <div key={index} style={{
-                padding: '3rem 2rem',
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderRadius: '12px',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                textAlign: 'center'
-              }}>
-                <p style={{ 
-                  fontSize: '1.2rem', 
-                  fontStyle: 'italic', 
-                  marginBottom: '2rem',
-                  color: '#ccc',
-                  lineHeight: '1.6'
-                }}>
-                  "{testimonial.quote}"
-                </p>
-                <div>
-                  <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                    {testimonial.author}
-                  </p>
-                  <p style={{ color: '#888', fontSize: '0.9rem' }}>
-                    {testimonial.company}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id='section-3'>
-        <div className="contact-wrapper">
-          <div className="cta-text">
-            <h2>Let's build <br /> <span>Something Great</span></h2>
-          </div>
-          
-          <div className="footer-bottom">
-            <div className="footer-links">
-              <div className="link-group">
-                <small>SOCIAL</small>
-                <a href="#">Instagram</a>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
-              </div>
-              <div className="link-group">
-                <small>CONTACT</small>
-                <a href="mailto:hello@dogstudio.co">hello@dogstudio.co</a>
-                <p>+32 81 22 55 11</p>
-              </div>
-              <div className="link-group">
-                <small>OFFICES</small>
-                <p>Namur / Chicago / Mexico</p>
-              </div>
+              <span style={{ fontSize: '1.5rem' }}>{step}</span>
+              <i className="ri-arrow-right-up-line" style={{ color: '#444' }}></i>
             </div>
-            
-            <div className="copyright">
-              <p>© 2026 DOGSTUDIO / DEPT®</p>
-              <p>Privacy Policy</p>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
+      
+      <div style={{ flex: '1 1 300px', padding: '4rem', borderRadius: '2rem' }}>
+        <div style={{ marginBottom: '3rem' }}>
+          <h4 style={{ fontSize: '4rem', margin: '0' }}>150+</h4>
+          <p style={{ color: '#666' }}>Awards & Recognitions</p>
+        </div>
+        <div>
+          <h4 style={{ fontSize: '4rem', margin: '0' }}>08</h4>
+          <p style={{ color: '#666' }}>Years of Chaos & Creation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Contact Section - Redesigned as a Bold Footer */}
+<section id='section-3' style={{ padding: '8rem 2rem 4rem', background: '#fff', color: '#000', borderRadius: '4rem 4rem 0 0' }}>
+  <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+    <div style={{ textAlign: 'center', marginBottom: '8rem' }}>
+      <h2 style={{ fontSize: 'clamp(3rem, 10vw, 12rem)', fontWeight: '900', letterSpacing: '-0.05em', lineHeight: '0.8' }}>
+        HAVE A <br /> PROJECT?
+      </h2>
+      <a href="mailto:hello@dogstudio.co" style={{ 
+        display: 'inline-block',
+        marginTop: '4rem',
+        fontSize: '1.5rem',
+        textDecoration: 'none',
+        color: '#000',
+        borderBottom: '2px solid #000',
+        paddingBottom: '5px'
+      }}>GET IN TOUCH</a>
+    </div>
+
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+      gap: '4rem',
+      paddingTop: '4rem',
+      borderTop: '1px solid rgba(0,0,0,0.1)'
+    }}>
+      <div className="footer-col">
+        <p style={{ fontWeight: '900', marginBottom: '1.5rem' }}>OFFICES</p>
+        <p>Namur / Chicago <br /> Mexico City</p>
+      </div>
+      <div className="footer-col">
+        <p style={{ fontWeight: '900', marginBottom: '1.5rem' }}>SOCIAL</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <a href="#" style={{ color: '#000', textDecoration: 'none' }}>Instagram</a>
+          <a href="#" style={{ color: '#000', textDecoration: 'none' }}>LinkedIn</a>
+        </div>
+      </div>
+      <div className="footer-col" style={{ textAlign: 'right' }}>
+        <p style={{ opacity: 0.5 }}>© 2026 DOGSTUDIO — PART OF DEPT®</p>
+      </div>
+    </div>
+  </div>
+</section>
     </>
   )
 }

@@ -246,8 +246,8 @@ function Home({ isLoading }) {
       <div className="footer-col">
         <p style={{ fontWeight: '900', marginBottom: '1.5rem' }}>SOCIAL</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <a href="#" style={{ color: '#000', textDecoration: 'none' }}>Instagram</a>
-          <a href="#" style={{ color: '#000', textDecoration: 'none' }}>LinkedIn</a>
+          <a href="nabiltalukderbd@gmail.com" style={{ color: '#000', textDecoration: 'none' }}>Gmail</a>
+          <a href="www.linkedin.com/in/nabil-hasan-sopno" style={{ color: '#000', textDecoration: 'none' }}>LinkedIn</a>
         </div>
       </div>
       <div className="footer-col" style={{ textAlign: 'right' }}>
@@ -261,3 +261,4 @@ function Home({ isLoading }) {
 }
 
 export default Home
+

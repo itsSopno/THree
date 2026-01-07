@@ -7,6 +7,7 @@ import About from './pages/About'
 import Work from './pages/Work'
 import Contact from './pages/Contact'
 import Loader from './Loader/Loader'
+import LenisScroll from './LenisScroll'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -18,15 +19,17 @@ function App() {
   return (
     <>
       {isLoading && <Loader finishedLoading={handleLoadingComplete} />}
-      <Navigation />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home isLoading={isLoading} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
+      <LenisScroll>
+        <Navigation />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home isLoading={isLoading} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+      </LenisScroll>
     </>
   )
 }

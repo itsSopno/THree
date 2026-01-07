@@ -140,7 +140,7 @@ function About() {
           transition={{ duration: 1.5 }}
           style={{ 
             height: '80vh', 
-            background: 'url("https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070") center/cover no-repeat',
+            background: 'url("https://i.ibb.co.com/0R6ChcFL/react-dog-Mozilla-Firefox-1-7-2026-10-19-40-AM.png") center/cover no-repeat',
             filter: 'grayscale(100%)',
             borderRadius: '2rem'
           }}

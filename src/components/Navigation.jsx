@@ -58,7 +58,8 @@ function Navigation() {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Work', path: '/work' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Contact', path: '/contact' },
+     { name: 'More', path: '/more' }
   ]
 
   return (

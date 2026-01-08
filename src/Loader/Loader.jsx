@@ -4,41 +4,63 @@ import gsap from 'gsap';
 const Loader = ({ finishedLoading }) => {
   const loaderRef = useRef();
   const counterRef = useRef();
+  const overlayRef = useRef();
 
   useEffect(() => {
-    // Simple loading animation
     let data = { value: 0 };
+    const tl = gsap.timeline();
+
+    // ১. কাউন্টার এনিমেশন (একটু দ্রুত হবে)
     gsap.to(data, {
       value: 100,
       duration: 3,
-      ease: "power2.inOut",
+      ease: "expo.out",
       onUpdate: () => {
         if (counterRef.current) {
-          counterRef.current.innerText = Math.round(data.value) + "%";
+          counterRef.current.innerText = Math.round(data.value);
         }
-      },
-      onComplete: () => {
-        // Small delay then animate out
-        setTimeout(() => {
-          gsap.to(loaderRef.current, {
-            y: "-100%",
-            duration: 1,
-            ease: "expo.inOut",
-            onComplete: finishedLoading
-          });
-        }, 300);
       }
     });
+
+    // ২. মেইন এনিমেশন সিকোয়েন্স
+    tl.to(".reveal-text", {
+      y: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power4.out",
+      delay: 0.5
+    })
+    .to(".reveal-text", {
+      y: "-110%",
+      duration: 1,
+      delay: 1,
+      ease: "power4.in"
+    })
+    .to(".loader-panel", {
+      height: 0,
+      duration: 1.2,
+      stagger: 0.1,
+      ease: "expo.inOut",
+      onComplete: finishedLoading
+    });
+
   }, [finishedLoading]);
 
   return (
-    <div ref={loaderRef} className="loader-wrapper">
+    <div ref={loaderRef} className="abstract-loader">
+      {/* দুটি প্যানেল যা স্লাইড হয়ে খুলে যাবে */}
+      <div className="loader-panel top"></div>
+      <div className="loader-panel bottom"></div>
+
       <div className="loader-content">
-        <h1 className="loader-logo">DOGSTUDIO</h1>
-        <div className="progress-bar">
-          <div ref={counterRef} className="counter">0%</div>
+        <div className="text-wrapper">
+          <h1 className="reveal-text">DOGSTUDIO</h1>
         </div>
-        <p>Loading Experience...</p>
+        
+        <div className="counter-box">
+          <span ref={counterRef} className="big-counter">0</span>
+          <div className="loading-tag">EXPERIENCE LOADING</div>
+        </div>
       </div>
     </div>
   );

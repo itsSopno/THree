@@ -8,6 +8,7 @@ import Work from './pages/Work'
 import Contact from './pages/Contact'
 import Loader from './Loader/Loader'
 import LenisScroll from './LenisScroll'
+import About2 from './components/About2/About2'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -27,6 +28,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/work" element={<Work />} />
             <Route path="/contact" element={<Contact />} />
+             <Route path="/more" element={<About2></About2>} />
           </Routes>
         </main>
       </LenisScroll>

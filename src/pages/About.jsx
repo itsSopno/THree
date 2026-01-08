@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import About2 from '../components/About2/About2';
 
 function About() {
   // Animation Variants
@@ -146,7 +147,131 @@ function About() {
           }}
         />
       </div>
+{/* --- NEW SECTION: CORE VALUES GRID --- */}
+{/* --- UPDATED SECTION: PROFESSIONAL RED COLOR PULSE --- */}
+<motion.section 
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={staggerContainer}
+  style={{ 
+    padding: '10rem 10%', 
+    background: '#fff', 
+    color: '#000',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '2rem'
+  }}
+>
+  {[
+    { title: "INSTINCT", desc: "We trust our gut over data. Innovation isn't found in spreadsheets; it's found in the wild." },
+    { title: "RAW SOUL", desc: "Every pixel must breathe. We inject human emotion into cold, digital frameworks." },
+    { title: "ALPHA TECH", desc: "We don't follow trends. We build the engines that drive them." }
+  ].map((item, index) => (
+    <motion.div 
+      key={index}
+      variants={fadeInUp}
+      // PROFESSIONAL RED ANIMATION
+      animate={{
+        // Cycling through subtle professional red tones
+        backgroundColor: ["#ffffff", "#fff5f5", "#fee2e2", "#ffffff"],
+        borderColor: ["#eeeeee", "#fecaca", "#ef4444", "#eeeeee"]
+      }}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: index * 0.8
+      }}
+      whileHover={{ 
+        y: -15,
+        backgroundColor: "#991b1b", // Deep professional red on hover
+        borderColor: "#7f1d1d",
+        color: "#ffffff",
+        boxShadow: "0 20px 40px rgba(153, 27, 27, 0.2)"
+      }}
+      style={{ 
+        padding: '3rem', 
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderRadius: '1.5rem',
+        cursor: 'pointer',
+        transition: 'color 0.4s ease, box-shadow 0.4s ease'
+      }}
+    >
+      <span style={{ 
+        fontSize: '0.8rem', 
+        fontWeight: 'bold', 
+        color: 'inherit', 
+        opacity: 0.5 
+      }}>
+        0{index + 2}
+      </span>
+      <h4 style={{ 
+        fontSize: '2rem', 
+        margin: '1.5rem 0', 
+        fontWeight: '900',
+        letterSpacing: '-0.02em' 
+      }}>
+        {item.title}
+      </h4>
+      <p style={{ 
+        color: 'inherit', 
+        opacity: 0.7, 
+        lineHeight: '1.6', 
+        fontSize: '1rem' 
+      }}>
+        {item.desc}
+      </p>
+    </motion.div>
+  ))}
+</motion.section>
+{/* --- NEW SECTION: HORIZONTAL SCROLL / STATS --- */}
+<section style={{ 
+  padding: '10rem 10%', 
+  background: '#080808', 
+  color: '#fff',
+  borderRadius: '4rem 4rem 0 0',
+  marginTop: '-4rem',
+  position: 'relative',
+  zIndex: 10
+}}>
+  <motion.div 
+    initial="hidden"
+    whileInView="visible"
+    variants={staggerContainer}
+  >
+    <motion.h2 
+      variants={fadeInUp}
+      style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: '900', marginBottom: '5rem', textAlign: 'center' }}
+    >
+      THE PACK BY <br /> THE NUMBERS
+    </motion.h2>
 
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+      gap: '4rem',
+      textAlign: 'center' 
+    }}>
+      {[
+        { label: "AWARDS WON", value: "48+" },
+        { label: "COFFEE / DAY", value: "124" },
+        { label: "GLOBAL CLIENTS", value: "18" },
+        { label: "WIZARDS", value: "32" }
+      ].map((stat, i) => (
+        <motion.div key={i} variants={fadeInUp}>
+          <h5 style={{ fontSize: '4rem', fontWeight: '900', margin: '0', color: 'transparent', WebkitTextStroke: '1px #555' }}>
+            {stat.value}
+          </h5>
+          <p style={{ letterSpacing: '0.2rem', fontSize: '0.8rem', marginTop: '1rem', color: '#888' }}>
+            {stat.label}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
+</section>
       {/* Footer Info */}
       <footer style={{ padding: '10rem 10%', textAlign: 'center', background: '#fff', color: '#000' }}>
         <motion.h3 
@@ -165,6 +290,7 @@ function About() {
           We are always looking for brave designers and technical wizards to join our journey.
         </motion.p>
       </footer>
+    
     </div>
   );
 }
